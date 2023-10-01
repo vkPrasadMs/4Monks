@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">4Monks</string>
+    <string name="title_activity_reels">Reels</string>
+    <string name="title_activity_home">Home</string>
+</resources>
