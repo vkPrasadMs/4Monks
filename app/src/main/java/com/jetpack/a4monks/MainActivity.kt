@@ -110,11 +110,10 @@ fun CartItem() {
 
     val focusManager = LocalFocusManager.current
 
-// LaunchedEffect prevents endless focus request
     LaunchedEffect(focusRequester) {
         if (showKeyboard.equals(true)) {
             focusRequester.requestFocus()
-            delay(100) // Make sure you have delay here
+            delay(100)
             keyboard?.show()
         }
     }
@@ -141,9 +140,9 @@ fun CartItem() {
         colors = listOf(
             Color(0xff81FBB9),
             Color(0xffBEFD4F)
-        ), // Gradient colors
-        startY = 0f, // Starting Y position of the gradient
-        endY = 500f // Ending Y position of the gradient
+        ),
+        startY = 0f,
+        endY = 500f
     )
     repeat(list.size) {
         totalCartValue += list[it].itemPrice
@@ -396,14 +395,6 @@ fun CartItem() {
                         //edittext coupon code
                         var value by remember { mutableStateOf("") }
 
-//                TextField(
-//                    value = value,
-//                    onValueChange = { value = it },
-//                    label = { Text("Promo code") },
-//                    maxLines = 2,
-//                    textStyle = TextStyle(color = Color.Blue, fontWeight = FontWeight.Bold),
-//                    modifier = Modifier.padding(20.dp)
-//                )
 
                         val context = LocalContext.current
                         val onSubmitOtp = remember(Unit) {
@@ -713,12 +704,4 @@ fun CartItem() {
     }
 
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    _4MonksTheme {
-        Greeting("Android")
-    }
 }

@@ -93,65 +93,6 @@ class Reels : AppCompatActivity() {
 
         }
 
-//        binding.videoView.
-
-
-//        mediaController.setMediaPlayer(object : MediaController(this),
-//            MediaController.MediaPlayerControl {
-//            override fun start() {
-//                Log.d("MEDIA_CONTROLLER", "start: ")
-//            }
-//
-//            override fun pause() {
-//                Log.d("MEDIA_CONTROLLER", "pause: ")
-//            }
-//
-//            override fun getDuration(): Int {
-//                Log.d("MEDIA_CONTROLLER", "getDuration: ")
-//                return 0;
-//            }
-//
-//            override fun getCurrentPosition(): Int {
-//                Log.d("MEDIA_CONTROLLER", "getCurrentPosition: ")
-//                return 0;
-//            }
-//
-//            override fun seekTo(pos: Int) {
-//                Log.d("MEDIA_CONTROLLER", "seekTo: $pos")
-//            }
-//
-//            override fun isPlaying(): Boolean {
-//                Log.d("MEDIA_CONTROLLER", "isPlaying: ")
-//                return true
-//            }
-//
-//            override fun getBufferPercentage(): Int {
-//                Log.d("MEDIA_CONTROLLER", "getBufferPercentage: ")
-//                return 0
-//            }
-//
-//            override fun canPause(): Boolean {
-//                Log.d("MEDIA_CONTROLLER", "canPause: ")
-//                return true
-//            }
-//
-//            override fun canSeekBackward(): Boolean {
-//                Log.d("MEDIA_CONTROLLER", "canSeekBackward: ")
-//                return true
-//            }
-//
-//            override fun canSeekForward(): Boolean {
-//                Log.d("MEDIA_CONTROLLER", "canSeekForward: ")
-//                return true
-//            }
-//
-//            override fun getAudioSessionId(): Int {
-//                Log.d("MEDIA_CONTROLLER", "getAudioSessionId: ")
-//                return 0
-//            }
-//
-//        })
-
 
         binding.composeView.apply {
 
@@ -169,16 +110,11 @@ class Reels : AppCompatActivity() {
                         val coroutineScope = rememberCoroutineScope()
                         val state = rememberLazyListState()
                         binding.videoView.setOnCompletionListener {
-//                            position.value += position.value
+
                             coroutineScope.launch {
                                 state.animateScrollToItem(index = state.firstVisibleItemIndex + 1)
                             }
                         }
-//                        coroutineScope.launch {
-//                            // Animate scroll to the first item
-//                            state.animateScrollToItem(index = position.value)
-//                        }
-
 
                         LazyColumn(
                             state = state,
@@ -197,9 +133,7 @@ class Reels : AppCompatActivity() {
                                     Uri.parse("http://65.0.70.203/rfid/production_id_4434242%20%282160p%29.mp4")
                                 val path =
                                     "android.resource://" + packageName + "/" + array[currentCount]
-//                                view.setVideoURI(Uri.parse(path))
-                                // sets the resource from the
-                                // videoUrl to the videoView
+
                                 binding.videoView.setVideoURI(Uri.parse(path))
 
                                 binding.videoView.start()
@@ -218,14 +152,6 @@ class Reels : AppCompatActivity() {
     }
 }
 
-@Composable
-fun Greeting2(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 
 @Preview(showBackground = true)
 @Composable
@@ -235,9 +161,9 @@ fun GreetingPreview2() {
         colors = listOf(
             Color(0xff262626).copy(alpha = 0.38f),
             Color(0xff262626).copy(alpha = 0.31f)
-        ), // Gradient colors
-        startY = 0f, // Starting Y position of the gradient
-        endY = 500f // Ending Y position of the gradient
+        ),
+        startY = 0f,
+        endY = 500f
     )
 
 
@@ -245,18 +171,18 @@ fun GreetingPreview2() {
         colors = listOf(
             Color(0xffFFFFFF).copy(alpha = 0.1f),
             Color(0xffFFFFFF).copy(alpha = 0.1f)
-        ), // Gradient colors
-        startY = 0f, // Starting Y position of the gradient
-        endY = 500f // Ending Y position of the gradient
+        ),
+        startY = 0f,
+        endY = 500f
     )
 
     val gradientBrush3 = Brush.verticalGradient(
         colors = listOf(
             Color(0xff81FBB9),
             Color(0xffBEFD4F)
-        ), // Gradient colors
-        startY = 0f, // Starting Y position of the gradient
-        endY = 500f // Ending Y position of the gradient
+        ),
+        startY = 0f,
+        endY = 500f
     )
 
     val gradientBrush4 = Brush.verticalGradient(
@@ -267,9 +193,9 @@ fun GreetingPreview2() {
             Color(0xff000000).copy(alpha = 0.3f),
             Color(0xff000000).copy(alpha = 0.4f),
             Color(0xff000000).copy(alpha = 0.5f),
-        ), // Gradient colors
-        startY = 0f, // Starting Y position of the gradient
-        endY = 500f // Ending Y position of the gradient
+        ),
+        startY = 0f,
+        endY = 500f
     )
 
 
@@ -282,38 +208,6 @@ fun GreetingPreview2() {
         Surface(modifier = Modifier.height(screenHeight), color = Color.Transparent) {
 
             Box(modifier = Modifier.fillMaxHeight()) {
-
-
-//                val context = LocalContext.current
-//                val url =
-//                    "http://65.0.70.203/rfid/production_id_4678261%20%281080p%29.mp4"
-//
-//                val exoPlayer = ExoPlayer.Builder(context).build()
-//                val mediaItem = MediaItem.fromUri(Uri.parse(url))
-//                exoPlayer.setMediaItem(mediaItem)
-//
-//                val playerView = StyledPlayerView(context)
-//                playerView.player = exoPlayer
-//
-//                DisposableEffect(AndroidView(factory = {
-//                    StyledPlayerView(context).apply {
-//                        player = exoPlayer
-//                        layoutParams =
-//                            FrameLayout.LayoutParams(
-//                                ViewGroup.LayoutParams.MATCH_PARENT,
-//                                ViewGroup.LayoutParams.MATCH_PARENT
-//                            )
-//                    }
-//                }, modifier = Modifier.height(screenHeight))) {
-//
-//                    exoPlayer.prepare()
-//                    exoPlayer.playWhenReady = true
-//                    exoPlayer.play()
-//
-//                    onDispose {
-//                        exoPlayer.release()
-//                    }
-//                }
 
 
                 Column(
