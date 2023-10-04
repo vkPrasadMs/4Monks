@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -104,11 +105,11 @@ class Reels : AppCompatActivity() {
                         color = Color.Transparent
                     ) {
 //                        val listState = rememberLazyListState()
-                        val position = remember {
-                            mutableStateOf(0)
-                        }
+
                         val coroutineScope = rememberCoroutineScope()
                         val state = rememberLazyListState()
+                        val snappingLayout = remember(state) { SnapLayoutInfoProvider(state) }
+                        val flingBehavior = rememberSnapFlingBehavior(snappingLayout)
                         binding.videoView.setOnCompletionListener {
 
                             coroutineScope.launch {
@@ -118,7 +119,7 @@ class Reels : AppCompatActivity() {
 
                         LazyColumn(
                             state = state,
-                            flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
+                            flingBehavior = flingBehavior
                         ) {
                             var currentCount = 0
                             items(100) {
@@ -129,8 +130,8 @@ class Reels : AppCompatActivity() {
                                     currentCount += 1
                                 }
 
-                                val uri =
-                                    Uri.parse("http://65.0.70.203/rfid/production_id_4434242%20%282160p%29.mp4")
+//                                val uri =
+//                                    Uri.parse("http://65.0.70.203/rfid/production_id_4434242%20%282160p%29.mp4")
                                 val path =
                                     "android.resource://" + packageName + "/" + array[currentCount]
 
@@ -199,7 +200,7 @@ fun GreetingPreview2() {
     )
 
 
-    var currentProgress by remember { mutableStateOf(0f) }
+    val currentProgress by remember { mutableStateOf(0f) }
 
     _4MonksTheme() {
         val configuration = LocalConfiguration.current
