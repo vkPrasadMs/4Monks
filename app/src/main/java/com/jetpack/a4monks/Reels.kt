@@ -1,6 +1,5 @@
 package com.jetpack.a4monks
 
-
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -53,16 +52,23 @@ import com.jetpack.a4monks.ui.theme._4MonksTheme
 import com.jetpack.a4monks.ui.theme.work_sans
 import kotlinx.coroutines.launch
 
+
 class Reels : AppCompatActivity() {
 
     private lateinit var binding: VideoBinding
 
+
+    private var array = ArrayList<Int>()
 
     @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = VideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        array.add(R.raw.sunset)
+        array.add(R.raw.lake)
+        array.add(R.raw.creek)
 
 
         // creating object of
@@ -77,7 +83,7 @@ class Reels : AppCompatActivity() {
         mediaController.setMediaPlayer(binding.videoView)
 
         // sets the media controller to the videoView
-        binding.videoView.setMediaController(mediaController);
+//        binding.videoView.setMediaController(mediaController);
 
 
         binding.videoView.setOnPreparedListener {
@@ -86,6 +92,66 @@ class Reels : AppCompatActivity() {
             Log.d("PRASAD", "onCreate: " + it.currentPosition)
 
         }
+
+//        binding.videoView.
+
+
+//        mediaController.setMediaPlayer(object : MediaController(this),
+//            MediaController.MediaPlayerControl {
+//            override fun start() {
+//                Log.d("MEDIA_CONTROLLER", "start: ")
+//            }
+//
+//            override fun pause() {
+//                Log.d("MEDIA_CONTROLLER", "pause: ")
+//            }
+//
+//            override fun getDuration(): Int {
+//                Log.d("MEDIA_CONTROLLER", "getDuration: ")
+//                return 0;
+//            }
+//
+//            override fun getCurrentPosition(): Int {
+//                Log.d("MEDIA_CONTROLLER", "getCurrentPosition: ")
+//                return 0;
+//            }
+//
+//            override fun seekTo(pos: Int) {
+//                Log.d("MEDIA_CONTROLLER", "seekTo: $pos")
+//            }
+//
+//            override fun isPlaying(): Boolean {
+//                Log.d("MEDIA_CONTROLLER", "isPlaying: ")
+//                return true
+//            }
+//
+//            override fun getBufferPercentage(): Int {
+//                Log.d("MEDIA_CONTROLLER", "getBufferPercentage: ")
+//                return 0
+//            }
+//
+//            override fun canPause(): Boolean {
+//                Log.d("MEDIA_CONTROLLER", "canPause: ")
+//                return true
+//            }
+//
+//            override fun canSeekBackward(): Boolean {
+//                Log.d("MEDIA_CONTROLLER", "canSeekBackward: ")
+//                return true
+//            }
+//
+//            override fun canSeekForward(): Boolean {
+//                Log.d("MEDIA_CONTROLLER", "canSeekForward: ")
+//                return true
+//            }
+//
+//            override fun getAudioSessionId(): Int {
+//                Log.d("MEDIA_CONTROLLER", "getAudioSessionId: ")
+//                return 0
+//            }
+//
+//        })
+
 
         binding.composeView.apply {
 
@@ -118,14 +184,23 @@ class Reels : AppCompatActivity() {
                             state = state,
                             flingBehavior = rememberSnapFlingBehavior(lazyListState = state)
                         ) {
+                            var currentCount = 0
                             items(100) {
 
-                                val uri =
-                                    Uri.parse("http://65.0.70.203/rfid/production_id_4678261%20%281080p%29.mp4")
+                                if (currentCount >= array.size - 1) {
+                                    currentCount = 0
+                                } else {
+                                    currentCount += 1
+                                }
 
+                                val uri =
+                                    Uri.parse("http://65.0.70.203/rfid/production_id_4434242%20%282160p%29.mp4")
+                                val path =
+                                    "android.resource://" + packageName + "/" + array[currentCount]
+//                                view.setVideoURI(Uri.parse(path))
                                 // sets the resource from the
                                 // videoUrl to the videoView
-                                binding.videoView.setVideoURI(uri)
+                                binding.videoView.setVideoURI(Uri.parse(path))
 
                                 binding.videoView.start()
 

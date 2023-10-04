@@ -135,10 +135,7 @@ fun CartItem() {
 
     val taxValue = 200
     val discount = 50
-
-
     var totalCartValue = 0
-
 
     val gradientBrush = Brush.verticalGradient(
         colors = listOf(
@@ -161,7 +158,7 @@ fun CartItem() {
     ) {
         Column {
 
-//            Your Shopping Cart
+//          Your Shopping Cart
             Text(modifier = Modifier.padding(16.dp).fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 text = "Your Shopping Cart",
@@ -185,10 +182,8 @@ fun CartItem() {
 //         #1F2326
                 Column {
 
-
                     LazyColumn {
                         items(list.size) {
-
 
                             Card(
                                 modifier = Modifier
